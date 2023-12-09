@@ -6,12 +6,63 @@ function App() {
   const [orderId, setOrderId] = useState('');
 
   const handleDelivery = () => {
-    // Xử lý logic khi đơn hàng đang giao
+    const desc = document.getElementById('desc').value;
+    const requestBody = {
+      deliveryStatusId: 2,
+      lastUpdateAt: new Date().toLocaleTimeString(),
+      desc: desc,
+    };
+
+    fetch('http://api.shopiec.shop/api/orders/order/' + orderId, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('API response:', data);
+      })
+      .catch(error => {
+        console.error('API error:', error);
+      });
+
     console.log(`Đang giao đơn hàng ${orderId}`);
   };
 
   const handleReceived = () => {
-    // Xử lý logic khi đơn hàng đã nhận hàng
+    const desc = document.getElementById('desc').value;
+    const requestBody = {
+      deliveryStatusId: 3,
+      lastUpdateAt: new Date().toLocaleTimeString(),
+      desc: desc,
+    };
+
+    fetch('http://api.shopiec.shop/api/orders/order/' + orderId, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('API response:', data);
+      })
+      .catch(error => {
+        console.error('API error:', error);
+      });
     console.log(`Đã nhận hàng ${orderId}`);
   };
 
@@ -22,9 +73,15 @@ function App() {
         <div>
           <label>Nhập ID đơn hàng:</label>
           <input
+            id="orderId"
             type="text"
             value={orderId}
             onChange={(e) => setOrderId(e.target.value)}
+          />
+          <label>NOTE:</label>
+          <input
+            id="desc"
+            type="text"
           />
         </div>
         <div>
