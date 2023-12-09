@@ -33,7 +33,7 @@ function App() {
         </div>
       </header>
       <img
-        src="http://shopiec.shop/static/media/logoRed.b15e7a509ea97bb9a56d.png"
+        src="http://res.cloudinary.com/dte2ps5qs/image/upload/v1702111323/izp7k5x6s6iicrawvekt.png"
         alt="Shopiec Logo"
         style={{ width: '100%', height: 'auto' }}
       />
